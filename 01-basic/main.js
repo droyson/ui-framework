@@ -17,4 +17,12 @@ lastNameInput.addEventListener("keyup", (e) => {
   fullNameInput.value = `${firstName} ${lastName}`;
 });
 
-// TODO: fetch data from JSON and display
+fetch("/user.json")
+  .then((res) => res.json())
+  .then((data) => {
+    firstName = data.firstName;
+    lastName = data.lastName;
+    firstNameInput.value = data.firstName;
+    lastNameInput.value = data.lastName;
+    fullNameInput.value = data.fullName;
+  });

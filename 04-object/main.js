@@ -61,3 +61,10 @@ editSaveButton.addEventListener("click", (e) => {
 fullNameInput.addEventListener("keyup", (e) => {
   state.fullName = e.target.value;
 });
+
+fetch("/user.json")
+  .then((res) => res.json())
+  .then((data) => {
+    state.firstName = data.firstName;
+    state.lastName = data.lastName;
+  });

@@ -25,4 +25,20 @@ editSaveButton.addEventListener("click", (e) => {
   fullNameInput.disabled = !isEdit;
 });
 
-// TODO: Update firstName and lastName on changing fullName
+fetch("/user.json")
+  .then((res) => res.json())
+  .then((data) => {
+    firstName = data.firstName;
+    lastName = data.lastName;
+    firstNameInput.value = data.firstName;
+    lastNameInput.value = data.lastName;
+    fullNameInput.value = data.fullName;
+  });
+
+fullNameInput.addEventListener("keyup", (e) => {
+  const [fName, lName] = e.target.value.split(" ");
+  firstName = fName;
+  lastName = lName;
+  firstNameInput.value = fName;
+  lastNameInput.value = lName;
+});

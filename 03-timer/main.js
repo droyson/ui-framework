@@ -9,17 +9,14 @@ let isEdit = false;
 
 firstNameInput.addEventListener("keyup", (e) => {
   firstName = e.target.value;
-  updateValues();
 });
 
 lastNameInput.addEventListener("keyup", (e) => {
   lastName = e.target.value;
-  updateValues();
 });
 
 editSaveButton.addEventListener("click", (e) => {
   isEdit = !isEdit;
-  updateValues();
 });
 
 function updateValues() {
@@ -30,4 +27,17 @@ function updateValues() {
   editSaveButton.innerText = isEdit ? "Save" : "Edit";
 }
 
-// TODO: Update values regularly using timer
+setInterval(updateValues, 1000);
+
+fetch("/user.json")
+  .then((res) => res.json())
+  .then((data) => {
+    firstName = data.firstName;
+    lastName = data.lastName;
+  });
+
+fullNameInput.addEventListener("keyup", (e) => {
+  const [fName, lName] = e.target.value.split(" ");
+  firstName = fName;
+  lastName = lName;
+});
